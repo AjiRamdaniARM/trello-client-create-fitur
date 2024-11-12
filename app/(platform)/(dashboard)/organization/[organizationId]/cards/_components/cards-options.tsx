@@ -36,16 +36,6 @@ export const CardsOptions = ({ data, onAddCard }: ListOptionsProps) => {
     },
   });
 
-  const { execute: executeCopy } = useAction(copyList, {
-    onSuccess: (data) => {
-      toast.success(`List "${data.title}" copied`);
-      closeRef.current?.click();
-    },
-    onError: (error) => {
-      toast.error(error);
-    },
-  });
-
   const onDelete = (formData: FormData) => {
     const id = formData.get("id") as string;
     const boardId = formData.get("boardId") as string;
@@ -53,12 +43,6 @@ export const CardsOptions = ({ data, onAddCard }: ListOptionsProps) => {
     executeDelete({ id, boardId });
   };
 
-  const onCopy = (formData: FormData) => {
-    const id = formData.get("id") as string;
-    const boardId = formData.get("boardId") as string;
-
-    executeCopy({ id, boardId });
-  };
 
   return (
     <Popover>
