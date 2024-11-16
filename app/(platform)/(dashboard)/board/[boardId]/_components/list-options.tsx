@@ -4,7 +4,6 @@ import { toast } from "sonner";
 import { List } from "@prisma/client";
 import { ElementRef, useRef } from "react";
 import { MoreHorizontal, Trash2, X } from "lucide-react";
-
 import {
   Popover,
   PopoverContent,
@@ -59,6 +58,7 @@ export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
 
     executeCopy({ id, boardId });
   };
+
 
   return (
     <Popover>

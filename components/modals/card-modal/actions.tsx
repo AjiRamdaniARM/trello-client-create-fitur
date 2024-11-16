@@ -1,7 +1,7 @@
 "use client";
 
 import { toast } from "sonner";
-import { Copy, Trash2 } from "lucide-react";
+import { Copy, Trash2, User } from "lucide-react";
 import { useParams } from "next/navigation";
 
 import { CardWithList } from "@/types";
@@ -11,6 +11,8 @@ import { Button } from "@/components/ui/button";
 import { deleteCard } from "@/actions/delete-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useCardModal } from "@/hooks/use-card-modal";
+import { userUserModal } from "@/hooks/use-user-modal";
+import { UserModal } from "../user-modal";
 
 interface ActionsProps {
   data: CardWithList;
@@ -19,6 +21,7 @@ interface ActionsProps {
 export const Actions = ({ data }: ActionsProps) => {
   const params = useParams();
   const cardModal = useCardModal();
+  const userModal = userUserModal();
 
   const { execute: executeCopyCard, isLoading: isLoadingCopy } = useAction(
     copyCard,
@@ -64,6 +67,8 @@ export const Actions = ({ data }: ActionsProps) => {
     });
   };
 
+  
+
   return (
     <div className="space-y-2 mt-2">
       <p className="text-xl font-semibold">Activity</p>
@@ -87,6 +92,18 @@ export const Actions = ({ data }: ActionsProps) => {
         <Trash2 className="h-5 w-5 mr-4" />
         Hapus
       </Button>
+
+      {/* === capital components invite members === */}
+      <UserModal />
+      <Button 
+      variant="gray"
+      onClick={() => userUserModal.getState().onOpenUser()}
+      className="w-full justify-start "
+      >
+        <User className="h-5 w-5 mr-4" />
+        Add User
+      </Button>
+      {/* === end capital components invite members === */}
     </div>
   );
 };
