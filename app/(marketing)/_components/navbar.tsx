@@ -8,7 +8,7 @@ export const Navbar = () => {
                 <div className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white py-1 px-3 rounded">
                      BOARDIFY
                 </div>
-                <div className="space-x-4 flex items-center">
+                <div className="space-x-4 flex items-center"> 
                     <Link href="/sign-in">
                         <Button size="sm" variant="outline" >
                             Login

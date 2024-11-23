@@ -1,55 +1,54 @@
-"use client";
+import { useEffect, useState } from 'react';
 
-import { User } from "lucide-react";
-import { useEffect, useState } from "react";
-
-type User = {
+interface User {
   id: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  name: string;
-};
+}
 
 export const ListCardUser = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [users, setUsers] = useState<User[]>([]); // State users bertipe User[]
+  const [loading, setLoading] = useState(true); // State untuk loading
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchUsers = async () => {
       try {
-        const response = await fetch("/api/users");
+        const response = await fetch('/api/user', {
+          method: 'GET', // Pastikan metode sesuai dengan handler API
+        });
+
         if (!response.ok) {
-          throw new Error("Failed to fetch user");
+          throw new Error(`HTTP Error! status: ${response.status}`);
         }
-        const data = await response.json();
-        setUser(data);
+
+        const data: User[] = await response.json(); // Data harus sesuai tipe User[]
+        setUsers(data); // Set data ke state users
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching users:', error);
       } finally {
-        setIsLoading(false);
+        setLoading(false); // Loading selesai
       }
     };
 
-    
-
-    fetchUser();
+    fetchUsers();
   }, []);
 
-  if (isLoading) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (!user) {
-    console.log(User);
-    return <div>User not found</div>;
-  }
-
   return (
-    <div className="main">
-      <h1>User Info</h1>
-      <div className="p-4 border rounded-md">
-        <p>Email: {user.email}</p>
-        <p>Name: {user.name}</p>
-      </div>
+    <div>
+      <h1>Users</h1>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>
+            <p>{user.first_name} {user.last_name}</p>
+            <p>{user.email}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
