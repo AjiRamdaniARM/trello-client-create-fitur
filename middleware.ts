@@ -5,7 +5,7 @@ import { authMiddleware, redirectToSignIn } from "@clerk/nextjs/server";
 // Please edit this to allow other routes to be public as needed.
 // See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your Middleware
 export default authMiddleware({
-  publicRoutes: ["/", "/api/webhook"],
+  publicRoutes: ["/", "/api/webhook", '/Member', '/api/authMember'],
   afterAuth(auth, req) {
     if (auth.userId && auth.isPublicRoute) {
       let path = "/select-org";
@@ -13,7 +13,6 @@ export default authMiddleware({
       if (auth.orgId) {
         path = `/organization/${auth.orgId}`;
       }
-
       const orgSelection = new URL(path, req.url);
       return NextResponse.redirect(orgSelection);
     }
@@ -28,6 +27,7 @@ export default authMiddleware({
     }
   },
 });
+
 export const config = {
   matcher: [
     // Skip Next.js internals and all static files, unless found in search params

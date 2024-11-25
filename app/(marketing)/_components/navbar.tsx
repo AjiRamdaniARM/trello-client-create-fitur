@@ -19,6 +19,11 @@ export const Navbar = () => {
                             Bergabung Gratis
                         </Button>
                     </Link>
+                    <Link href="/Member">
+                        <Button size="sm" variant="outline">
+                            Member
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </div>

@@ -49,7 +49,7 @@ const MarketingPage = () => {
                 Berkolaborasi, mengelola proyek, dan mencapai puncak produktivitas baru, dari kantor rumah, cara tim Anda bekerja adalah unik - capai semuanya di Task Managment Community.
             </div>
             <Button className="mt-6 bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white shadow-lg transform transition-transform duration-300 hover:scale-105" size="lg" asChild>
-                <Link href="/Member">
+                <Link href="/sign-up">
                     Bergabung Di LMS UNIMAL
                 </Link>
             </Button>
