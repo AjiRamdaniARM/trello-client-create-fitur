@@ -19,7 +19,7 @@ export const Navbar = () => {
                             Bergabung Gratis
                         </Button>
                     </Link>
-                    <Link href="/Member">
+                    <Link href="/Member/register">
                         <Button size="sm" variant="outline">
                             Member
                         </Button>

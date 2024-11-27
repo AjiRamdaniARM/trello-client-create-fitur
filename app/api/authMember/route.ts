@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     const newMember = await prisma.member.create({
       data: {
         email,
-        password: hashedPassword, // Simpan password yang telah di-hash
+        password: hashedPassword, 
         name,
       },
     });
@@ -40,15 +40,12 @@ export async function POST(req: Request) {
   } catch (error: any) {
     console.error('Error registering member:', error);
 
-    // Tangani error unik (contoh: email sudah ada)
     if (error.code === 'P2002' && error.meta?.target?.includes('email')) {
       return NextResponse.json({ message: 'Email already exists' }, { status: 400 });
     }
 
-    // Tangani error lainnya
     return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   } finally {
-    // Pastikan Prisma Client ditutup
     await prisma.$disconnect();
   }
 }
